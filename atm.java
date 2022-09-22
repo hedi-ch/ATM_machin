@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 
 class user {
 	String name;
@@ -17,29 +18,19 @@ class user {
 		balance += amount;
 	}
 	void printbalance() {
-		System.out.println(balance);
+		JOptionPane.showMessageDialog(null,balance);
 	}
 	void withdraw(int amount){	
 		if (balance > amount) balance -= amount;
-		else System.out.println("your brok hh");
+		else JOptionPane.showMessageDialog(null,"your brok hh");
 	}
 }
 
 class ATM {
 
-	// declaretion a scanner
-	static Scanner Scanner = new Scanner(System.in);
-
 
 	static void helpPrint(){
-		System.out.println();
-		System.out.println("-------------helo------------");
-		System.out.println("this is the comond you can do");
-		System.out.println("      For view help    :-->0");
-		System.out.println("      For withdraw     :-->1");
-		System.out.println("      For deposite     :-->2");
-		System.out.println("      For view balance :-->3");
-		System.out.println("      For quite        :-->4");
+		JOptionPane.showMessageDialog(null,"\n-------------helo------------\nthis is the comond you can do\n      For view help    :-->0\n      For withdraw     :-->1\n      For deposite     :-->2\n      For view balance :-->3\n      For quite        :-->4");
 	}
 
 	static user compte_verifiecation(int id , int pass,user user_array []){
@@ -59,16 +50,13 @@ class ATM {
 		user user_found;
 
 		do{
-			System.out.println("hi for do any trasaction pls enter your info:");
-			System.out.print("Login_info:");
-			int id = Scanner.nextInt();
-			System.out.print("password :");
-			int password = Scanner.nextInt();
+			int id = Integer.parseInt(JOptionPane.showInputDialog("hi for do any trasaction pls enter your info:\nLogin_info:"));
+			int password = Integer.parseInt(JOptionPane.showInputDialog("password :"));
 			// recher for user if no user found null will return 
 			user_found = compte_verifiecation(id,password,compts);
 			verification = ( user_found != null )? true : false;
-			if(verification) System.out.println("login seccse");  
-			else System.out.println("rong info :( reenter again :)");
+			if(verification) JOptionPane.showMessageDialog(null,"login seccse");  
+			else JOptionPane.showMessageDialog(null,"rong info :( reenter again :)");
 
 		}while(!verification);
 		return user_found;
@@ -93,21 +81,18 @@ class ATM {
 		byte command;
 
 		do{
-			System.out.print("how we can help you :(0 for help)\n>>>>>");
-			command = Scanner.nextByte();
+			command = Byte.parseByte(JOptionPane.showInputDialog("how we can help you :(0 for help)"));
 			switch ( command) {
 			case 0:{
 				helpPrint();
 				break;
 			}	
 			case 1 : {
-				System.out.println("how much you need to withdraw");
-				user_Login.withdraw(Scanner.nextInt());
+				user_Login.withdraw(Integer.parseInt(JOptionPane.showInputDialog("how much you need to withdraw")));
 				break;
 			}
 			case 2 : {
-				System.out.println("how much you need to deposite");
-				user_Login.deposite(Scanner.nextInt());
+				user_Login.deposite(Integer.parseInt(JOptionPane.showInputDialog("how much you need to deposite")));
 				break;
 			}
 			case 3 : {
@@ -115,10 +100,10 @@ class ATM {
 				break;
 			}
 			case 4 : {
-				System.out.println("byye :)");
+				JOptionPane.showMessageDialog(null,"byye :)");
 				break;
 			}
-			default : System.out.println("you choise do not existe");
+			default : JOptionPane.showMessageDialog(null,"you choise do not existe");
 
 			}
 		}while(command != 4);
